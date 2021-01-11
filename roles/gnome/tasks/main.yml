@@ -1,0 +1,95 @@
+---
+# roles/gnome/tasks/main.yml
+
+- name: Install dconf module dependencies
+  pip:
+    name: psutil
+    state: present
+  changed_when: false
+  tags:
+    - packages
+    - keyboard
+    - terminal
+    - night-light
+
+- name: Add dvorak to keyboard layout
+  become_user: daluca
+  dconf:
+    key: /org/gnome/desktop/input-sources/sources
+    value: "[('xkb', 'us+dvorak'), ('xkb', 'us')]"
+  tags:
+    - keyboard
+
+# - name: Read gnome terminal profiles
+#   become_user: daluca
+#   dconf:
+#     key: "/org/gnome/terminal/legacy/profiles:/default"
+#     # key: "/org/gnome/terminal/legacy/profiles:/:3f8f7c36-59d3-4aab-91ae-fa4ac2297b33"
+#     state: read
+#   register: gnome_terminal
+#   tags:
+#     - terminal
+
+# - name: Show gnome terminal profiles
+#   debug:
+#     msg: "{{ gnome_terminal.value[1:-1] }}"
+#   tags:
+#     - terminal
+
+# - name: Read default gnome terminal variables
+#   become_user: daluca
+#   dconf:
+#     # key: "/org/gnome/terminal/legacy/profiles:/:{{ gnome_terminal.value[1:-1] }}/scrollbar-policy"
+#     key: /org/gnome/terminal/legacy/profiles:/3f8f7c36-59d3-4aab-91ae-fa4ac2297b33
+#     state: read
+#   register: test
+#   tags:
+#     - terminal
+
+# - name: Show gnome terminal profiles
+#   debug:
+#     var: test
+#   tags:
+#     - terminal
+
+- name: Activate gnome night light
+  become_user: daluca
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    value: "true"
+  tags:
+    - night-light
+
+- name: Set night light to activate based on schedule
+  become_user: daluca
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic"
+    value: "true"
+  tags:
+    - night-light
+
+# - name: Read currently available keyboard layouts in Gnome
+#   become_user: daluca
+#   dconf:
+#     key: "/org/gnome/desktop/input-sources/sources"
+#     state: read
+#   register: keyboard_layouts
+#   tags:
+#     - keyboard
+
+# - name: Print keyboard layouts
+#   debug:
+#     var: keyboard_layouts
+#   tags:
+#     - keyboard
+
+- name: Remove pip dependencies for dconf ansible module
+  pip:
+    name: psutil
+    state: absent
+  changed_when: false
+  tags:
+    - packages
+    - keyboard
+    - terminal
+    - night-light

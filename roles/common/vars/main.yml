@@ -1,0 +1,34 @@
+---
+# roles/common/vars/main.yml
+
+packages:
+  - htop
+  - firefox
+  - pulseaudio
+  - docker
+  # - docker-compose
+  - man-db
+  - git
+  - tmux
+  - zsh
+  - curl
+  - rsync
+
+archlinux_packages:
+  - base
+
+thinkpad_packages:
+  - intel-ucode
+  - sof-firmware
+  - fwupd
+  - gnome-firmware
+  - linux-firmware
+
+python_packages:
+  - docker-compose
+  # - psutil
+
+enabled_services:
+  - docker
+  - bluetooth
+  - NetworkManager
