@@ -13,6 +13,8 @@ packages:
   - zsh
   - curl
   - rsync
+  - nfs-utils
+  - autofs
 
 archlinux_packages:
   - base
@@ -32,3 +34,6 @@ enabled_services:
   - docker
   - bluetooth
   - NetworkManager
+  - ntpd
+  - rpcbind
+  - autofs
