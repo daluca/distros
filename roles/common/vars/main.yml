@@ -14,7 +14,10 @@ packages:
   - curl
   - rsync
   - nfs-utils
+  - ntp
   - autofs
+  - python-pip
+  - ttf-ms-fonts
 
 archlinux_packages:
   - base

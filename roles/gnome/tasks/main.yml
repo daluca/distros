@@ -1,6 +1,12 @@
 ---
 # roles/gnome/tasks/main.yml
 
+- name: Installing gnome packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages}}"
+
 - name: Install dconf module dependencies
   pip:
     name: psutil

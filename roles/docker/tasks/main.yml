@@ -1,0 +1,33 @@
+---
+# roles/docker/tasks/main.yml
+
+- name: "List all vars"
+  debug:
+    var: hostvars
+
+- name: Install docker packages
+  become: yes
+  package:
+    update_cache: yes
+  tags:
+    - packages
+  
+- name: Enable docker service
+  become: yes
+  service:
+    name: docker
+  tags:
+    - services
+
+- name: "Add docker group to {{ ansible_user_id }}"
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+
+- name: Start docker service
+  become: yes
+  service:
+    name: docker
+    state: started
