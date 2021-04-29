@@ -19,6 +19,8 @@ packages:
   - python-pip
   - ttf-ms-fonts
   - ttf-droid
+  - openvpn
+  - networkmanager-vpn
 
 archlinux_packages:
   - base
