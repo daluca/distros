@@ -18,6 +18,7 @@ packages:
   - autofs
   - python-pip
   - ttf-ms-fonts
+  - ttf-droid
 
 archlinux_packages:
   - base
