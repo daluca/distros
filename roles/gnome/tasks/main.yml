@@ -75,10 +75,10 @@
   tags:
     - night-light
 
-- name: "Copy flame butterfly logo to /home/{{ ansible_env.USER }}/.face"
+- name: "Copy flame butterfly logo to /home/{{ ansible_user_id }}/.face"
   ansible.builtin.copy:
     src: flame-butterfly.png
-    dest: "/home/{{ ansible_env.USER }}/.face"
+    dest: "/home/{{ ansible_user_id }}/.face"
   tags:
     - logo
 
