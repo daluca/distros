@@ -9,7 +9,7 @@
 
   roles:
     - common
-    - arch
+    # - arch
     - gnome
     - role: docker
       tags:
