@@ -2,44 +2,59 @@
 # roles/common/vars/main.yml
 
 packages:
-  - htop
-  - firefox
-  - pulseaudio
-  - docker
-  # - docker-compose
-  - man-db
-  - git
-  - tmux
-  - zsh
-  - curl
-  - rsync
-  - nfs-utils
-  - ntp
-  - autofs
-  - python-pip
-  - ttf-ms-fonts
-  - ttf-droid
-  - openvpn
-  - networkmanager-vpn
+  archlinux:
+    - base
+    - htop
+    - firefox
+    - pulseaudio
+    - docker
+    # - docker-compose
+    - man-db
+    - git
+    - tmux
+    - zsh
+    - curl
+    - rsync
+    - nfs-utils
+    - ntp
+    - autofs
+    - python-pip
+    - ttf-droid
+    - openvpn
+    - networkmanager-openvpn
+  aur:
+    - ttf-ms-fonts
+    - visual-studio-code-bin
+    - exodus
+    - zoom
+  thinkpad:
+    - intel-ucode
+    - sof-firmware
+    - fwupd
+    - gnome-firmware
+    - linux-firmware
+  python:
+    - docker-compose
 
-archlinux_packages:
-  - base
+# archlinux_packages:
+#   - base
 
-thinkpad_packages:
-  - intel-ucode
-  - sof-firmware
-  - fwupd
-  - gnome-firmware
-  - linux-firmware
+# thinkpad_packages:
+#   - intel-ucode
+#   - sof-firmware
+#   - fwupd
+#   - gnome-firmware
+#   - linux-firmware
 
-python_packages:
-  - docker-compose
+# python_packages:
+#   - docker-compose
   # - psutil
 
-enabled_services:
-  - docker
-  - bluetooth
-  - NetworkManager
-  - ntpd
-  - rpcbind
-  - autofs
+services:
+  enabled:
+    - docker
+    - bluetooth
+    - NetworkManager
+    - ntpd
+    - rpcbind
+    - autofs

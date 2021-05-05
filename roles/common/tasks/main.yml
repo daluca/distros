@@ -2,6 +2,7 @@
 # roles/common/vars/main.yml
 
 - name: Update package manager cache for Arch Linux
+  become: yes
   package:
     update_cache: yes
   changed_when: False
@@ -10,36 +11,40 @@
     - packages
 
 - name: Install general packages
+  become: yes
   package:
     name: "{{ item }}"
     state: latest
-  loop: "{{ packages }}"
+  loop: "{{ packages.archlinux }}"
   when: ansible_facts['os_family'] == 'Archlinux'
   tags:
     - packages
 
 - name: Install Thinkpad X1 Carbon Gen 8 specific packages
+  become: yes
   package:
     name: "{{ item }}"
     state: latest
-  loop: "{{ thinkpad_packages }}"
+  loop: "{{ packages.thinkpad }}"
   when: ansible_facts['product_version'] == 'ThinkPad X1 Carbon Gen 8' and ansible_facts['os_family'] == 'Archlinux'
   tags:
     - packages
 
 - name: Install python packages
+  become: yes
   pip:
     name: "{{ item }}"
     state: latest
-  loop: "{{ python_packages }}"
+  loop: "{{ packages.python }}"
   tags:
     - packages
 
 - name: Ensure services are enabled
+  become: yes
   service:
     name: "{{ item }}"
     enabled: yes
-  loop: "{{ enabled_services }}"
+  loop: "{{ services.enabled }}"
   tags:
     - packages
     - services
