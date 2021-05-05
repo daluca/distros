@@ -1,2 +1,3 @@
 packages:
-  - gnome-tweak-tool
+  archlinux:
+    - gnome-tweak-tool

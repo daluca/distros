@@ -2,13 +2,15 @@
 # roles/gnome/tasks/main.yml
 
 - name: Installing gnome packages
-  package:
+  become: yes
+  ansible.builtin.package:
     name: "{{ item }}"
     state: latest
-  loop: "{{ packages}}"
+  loop: "{{ packages.archlinux }}"
 
 - name: Install dconf module dependencies
-  pip:
+  become: yes
+  ansible.builtin.pip:
     name: psutil
     state: present
   changed_when: false
@@ -19,8 +21,8 @@
     - night-light
 
 - name: Add dvorak to keyboard layout
-  become_user: daluca
-  dconf:
+  # become_user: daluca
+  community.general.dconf:
     key: /org/gnome/desktop/input-sources/sources
     value: "[('xkb', 'us+dvorak'), ('xkb', 'us')]"
   tags:
@@ -59,38 +61,30 @@
 #     - terminal
 
 - name: Activate gnome night light
-  become_user: daluca
-  dconf:
+  # become_user: daluca
+  community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
     value: "true"
   tags:
     - night-light
 
 - name: Set night light to activate based on schedule
-  become_user: daluca
-  dconf:
+  community.general.dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic"
     value: "true"
   tags:
     - night-light
 
-# - name: Read currently available keyboard layouts in Gnome
-#   become_user: daluca
-#   dconf:
-#     key: "/org/gnome/desktop/input-sources/sources"
-#     state: read
-#   register: keyboard_layouts
-#   tags:
-#     - keyboard
-
-# - name: Print keyboard layouts
-#   debug:
-#     var: keyboard_layouts
-#   tags:
-#     - keyboard
+- name: "Copy flame butterfly logo to /home/{{ ansible_env.USER }}/.face"
+  ansible.builtin.copy:
+    src: flame-butterfly.png
+    dest: "/home/{{ ansible_env.USER }}/.face"
+  tags:
+    - logo
 
 - name: Remove pip dependencies for dconf ansible module
-  pip:
+  become: yes
+  ansible.builtin.pip:
     name: psutil
     state: absent
   changed_when: false
