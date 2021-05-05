@@ -3,21 +3,10 @@
 
 - hosts: all
   gather_facts: true
-  # become: yes
-  # become_method: sudo
-  # become_user: root
 
   roles:
     - common
-    # - arch
     - gnome
     - role: docker
       tags:
         - docker
-
-  # tasks:
-    # name: Install docker
-    # include_role:
-    #   name: docker
-    # tags:
-    #   - docker
