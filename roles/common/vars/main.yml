@@ -36,20 +36,6 @@ packages:
   python:
     - docker-compose
 
-# archlinux_packages:
-#   - base
-
-# thinkpad_packages:
-#   - intel-ucode
-#   - sof-firmware
-#   - fwupd
-#   - gnome-firmware
-#   - linux-firmware
-
-# python_packages:
-#   - docker-compose
-  # - psutil
-
 services:
   enabled:
     - docker
