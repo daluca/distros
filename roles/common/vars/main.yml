@@ -22,11 +22,14 @@ packages:
     - ttf-droid
     - openvpn
     - networkmanager-openvpn
+    - deluge
+    - deluge-gtk
   aur:
     - ttf-ms-fonts
     - visual-studio-code-bin
     - exodus
     - zoom
+    - g810-led-git
   thinkpad:
     - intel-ucode
     - sof-firmware
